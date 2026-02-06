@@ -1,0 +1,231 @@
+
+{% comment %}
+  IMERBELA - Hair & Scalp Insights Section
+  Dermatology-inspired educational section
+{% endcomment %}
+
+<style>
+  .imerbela-insights {
+    background-color: #ffffff;
+    padding: 100px 0;
+    font-family: 'Inter', sans-serif;
+    color: #111111;
+  }
+
+  .imerbela-insights__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  @media (max-width: 991px) {
+    .imerbela-insights {
+      padding: 60px 0;
+    }
+    .imerbela-insights__container {
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+    .imerbela-insights__visual {
+      order: 2;
+    }
+    .imerbela-insights__content {
+      order: 1;
+      text-align: center;
+    }
+  }
+
+  .imerbela-insights__visual {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    background-color: #f8f8f8;
+    overflow: hidden;
+  }
+
+  .imerbela-insights__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%);
+  }
+
+  /* Callout system */
+  .imerbela-insights__callout {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+  }
+
+  .imerbela-insights__callout-line {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .imerbela-insights__callout-label {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: 6px 12px;
+    font-weight: 600;
+    margin-left: 8px;
+    white-space: nowrap;
+  }
+
+  .imerbela-insights__content-tag {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #6B8E23;
+    margin-bottom: 16px;
+  }
+
+  .imerbela-insights__title {
+    font-size: 38px;
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 0 0 16px 0;
+  }
+
+  .imerbela-insights__description {
+    font-size: 16px;
+    color: #555555;
+    line-height: 1.6;
+    font-weight: 300;
+    margin-bottom: 32px;
+  }
+
+  .imerbela-insights__button {
+    display: inline-flex;
+    align-items: center;
+    background-color: #111111;
+    color: #ffffff;
+    padding: 18px 40px;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    border-radius: 4px;
+    transition: all 0.4s ease;
+  }
+
+  .imerbela-insights__button:hover {
+    background-color: #000000;
+    transform: translateY(-2px);
+  }
+
+  .imerbela-insights__button svg {
+    margin-left: 12px;
+    transition: transform 0.3s ease;
+  }
+
+  .imerbela-insights__button:hover svg {
+    transform: translateX(4px);
+  }
+</style>
+
+<div class="imerbela-insights">
+  <div class="imerbela-insights__container">
+    
+    <!-- Visual Side -->
+    <div class="imerbela-insights__visual">
+      {% if section.settings.image %}
+        <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="{{ section.settings.image.alt }}" class="imerbela-insights__img">
+      {% else %}
+        <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=1200" alt="Scalp Analysis" class="imerbela-insights__img">
+      {% endif %}
+
+      <!-- Pointers - Fixed placements for minimalism -->
+      <div class="imerbela-insights__callout" style="top: 25%; left: 40%;">
+        <div class="imerbela-insights__callout-line" style="width: 40px;"></div>
+        <div class="imerbela-insights__callout-label">Dandruff</div>
+      </div>
+
+      <div class="imerbela-insights__callout" style="top: 45%; left: 55%;">
+        <div class="imerbela-insights__callout-line" style="width: 60px;"></div>
+        <div class="imerbela-insights__callout-label">Itchiness</div>
+      </div>
+
+      <div class="imerbela-insights__callout" style="bottom: 30%; left: 30%;">
+        <div class="imerbela-insights__callout-line" style="width: 50px;"></div>
+        <div class="imerbela-insights__callout-label">Dryness</div>
+      </div>
+    </div>
+
+    <!-- Content Side -->
+    <div class="imerbela-insights__content">
+      <span class="imerbela-insights__content-tag">{{ section.settings.tag_text }}</span>
+      <h2 class="imerbela-insights__title">{{ section.settings.heading }}</h2>
+      <div class="imerbela-insights__description">
+        {{ section.settings.description }}
+      </div>
+
+      {% if section.settings.button_text != blank %}
+        <a href="{{ section.settings.button_link }}" class="imerbela-insights__button">
+          {{ section.settings.button_text }}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hair & Scalp Insights",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Main Visual"
+    },
+    {
+      "type": "text",
+      "id": "tag_text",
+      "label": "Tagline",
+      "default": "Hair & Scalp Insights"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Scalp health affects hair health."
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Many hair concerns begin at the scalp. Identifying issues like dandruff, dryness, and irritation helps choose the right care routine. IMERBELA formulations are designed to support scalp balance.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Explore Neem Seed Kernel Care"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hair & Scalp Insights"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,460 @@
+
+{% comment %}
+  IMERBELA - Visible Results Before/After Slider
+  Minimalist design inspired by beminimalist.co
+{% endcomment %}
+
+<style>
+  .imerbela-visible-results {
+    background-color: #ffffff;
+    padding: 100px 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #111111;
+  }
+
+  .imerbela-visible-results__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  @media (max-width: 991px) {
+    .imerbela-visible-results {
+      padding: 80px 0;
+    }
+    .imerbela-visible-results__container {
+      grid-template-columns: 1fr;
+      gap: 50px;
+      text-align: center;
+    }
+  }
+
+  /* Slider Styling */
+  .imerbela-slider {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background-color: #fcfcfc;
+    border-radius: 2px;
+    user-select: none;
+    cursor: ew-resize;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+  }
+
+  .imerbela-slider__after {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .imerbela-slider__before-container {
+    position: absolute;
+    inset: 0;
+    width: 50%; /* Initial position */
+    height: 100%;
+    overflow: hidden;
+    border-right: 2px solid #ffffff;
+    z-index: 1;
+    transition: width 0.05s ease;
+  }
+
+  .imerbela-slider__before-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: none;
+  }
+
+  .imerbela-slider__label {
+    position: absolute;
+    top: 24px;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(10px);
+    color: #ffffff;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: 8px 16px;
+    font-weight: 600;
+    pointer-events: none;
+  }
+
+  .imerbela-slider__label--before {
+    left: 24px;
+  }
+
+  .imerbela-slider__label--after {
+    right: 24px;
+  }
+
+  .imerbela-slider__handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background-color: #ffffff;
+    z-index: 20;
+    transform: translateX(-50%);
+    pointer-events: none;
+    transition: left 0.05s ease;
+  }
+
+  .imerbela-slider__handle-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .imerbela-slider__handle-button::before,
+  .imerbela-slider__handle-button::after {
+    content: '';
+    width: 1px;
+    height: 16px;
+    background-color: #e0e0e0;
+    margin: 0 3px;
+  }
+
+  /* Content Styling */
+  .imerbela-results__content {
+    max-width: 500px;
+  }
+
+  @media (max-width: 991px) {
+    .imerbela-results__content {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+  }
+
+  .imerbela-results__tag {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #6B8E23;
+    margin-bottom: 16px;
+  }
+
+  .imerbela-results__title {
+    font-size: 38px;
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 0 0 12px 0;
+  }
+
+  @media (max-width: 768px) {
+    .imerbela-results__title {
+      font-size: 32px;
+    }
+  }
+
+  .imerbela-results__subtitle {
+    color: #888888;
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 300;
+    margin-bottom: 40px;
+    line-height: 1.5;
+  }
+
+  .imerbela-results__feature-title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  .imerbela-results__description {
+    font-size: 15px;
+    color: #555555;
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 30px;
+  }
+
+  .imerbela-results__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px 0;
+  }
+
+  .imerbela-results__list-item {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    color: #555555;
+    margin-bottom: 12px;
+    font-weight: 300;
+  }
+
+  @media (max-width: 991px) {
+    .imerbela-results__list-item {
+      justify-content: center;
+    }
+  }
+
+  .imerbela-results__dot {
+    width: 6px;
+    height: 6px;
+    background-color: #6B8E23;
+    border-radius: 50%;
+    margin-right: 14px;
+  }
+
+  .imerbela-results__disclaimer {
+    font-size: 11px;
+    color: #aaaaaa;
+    font-style: italic;
+    margin-bottom: 40px;
+  }
+
+  .imerbela-results__button {
+    display: inline-block;
+    background-color: #111111;
+    color: #ffffff;
+    padding: 18px 48px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    border-radius: 2px;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .imerbela-results__button:hover {
+    background-color: #000000;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+</style>
+
+<div class="imerbela-visible-results">
+  <div class="imerbela-visible-results__container">
+    
+    <!-- Visual Slider -->
+    <div class="imerbela-slider" id="ImerbelaSlider-{{ section.id }}">
+      <span class="imerbela-slider__label imerbela-slider__label--before">Before</span>
+      <span class="imerbela-slider__label imerbela-slider__label--after">After</span>
+      
+      {% if section.settings.after_image %}
+        <img src="{{ section.settings.after_image | image_url: width: 1200 }}" alt="After treatment" class="imerbela-slider__after" loading="lazy">
+      {% else %}
+        <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=1200" alt="Placeholder After" class="imerbela-slider__after">
+      {% endif %}
+
+      <div class="imerbela-slider__before-container" id="BeforeContainer-{{ section.id }}">
+        {% if section.settings.before_image %}
+          <img src="{{ section.settings.before_image | image_url: width: 1200 }}" alt="Before treatment" class="imerbela-slider__before-img" id="BeforeImage-{{ section.id }}">
+        {% else %}
+          <img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&q=80&w=1200" alt="Placeholder Before" class="imerbela-slider__before-img" id="BeforeImage-{{ section.id }}">
+        {% endif %}
+      </div>
+
+      <div class="imerbela-slider__handle" id="SliderHandle-{{ section.id }}">
+        <div class="imerbela-slider__handle-button"></div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="imerbela-results__content">
+      <span class="imerbela-results__tag">{{ section.settings.tag_text }}</span>
+      <h2 class="imerbela-results__title">{{ section.settings.heading }}</h2>
+      <p class="imerbela-results__subtitle">{{ section.settings.subtext }}</p>
+
+      <div class="imerbela-results__details">
+        <h3 class="imerbela-results__feature-title">{{ section.settings.feature_title }}</h3>
+        <div class="imerbela-results__description">{{ section.settings.description }}</div>
+
+        <ul class="imerbela-results__list">
+          {% if section.settings.bullet_1 != blank %}
+            <li class="imerbela-results__list-item"><span class="imerbela-results__dot"></span>{{ section.settings.bullet_1 }}</li>
+          {% endif %}
+          {% if section.settings.bullet_2 != blank %}
+            <li class="imerbela-results__list-item"><span class="imerbela-results__dot"></span>{{ section.settings.bullet_2 }}</li>
+          {% endif %}
+          {% if section.settings.bullet_3 != blank %}
+            <li class="imerbela-results__list-item"><span class="imerbela-results__dot"></span>{{ section.settings.bullet_3 }}</li>
+          {% endif %}
+        </ul>
+
+        <p class="imerbela-results__disclaimer">{{ section.settings.disclaimer }}</p>
+
+        {% if section.settings.cta_text != blank %}
+          <a href="{{ section.settings.cta_link }}" class="imerbela-results__button">
+            {{ section.settings.cta_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  (function() {
+    const slider = document.getElementById('ImerbelaSlider-{{ section.id }}');
+    const beforeContainer = document.getElementById('BeforeContainer-{{ section.id }}');
+    const beforeImage = document.getElementById('BeforeImage-{{ section.id }}');
+    const handle = document.getElementById('SliderHandle-{{ section.id }}');
+
+    function updateSlider(clientX) {
+      const rect = slider.getBoundingClientRect();
+      const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+      const percentage = (x / rect.width) * 100;
+
+      beforeContainer.style.width = percentage + '%';
+      handle.style.left = percentage + '%';
+      
+      // Ensure the before image width matches the container for proper overlay
+      if(beforeImage) {
+        beforeImage.style.width = rect.width + 'px';
+      }
+    }
+
+    function onMove(e) {
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      updateSlider(clientX);
+    }
+
+    slider.addEventListener('mousemove', onMove);
+    slider.addEventListener('touchmove', (e) => {
+      // Prevent scrolling when interacting with slider
+      if (e.cancelable) e.preventDefault();
+      onMove(e);
+    }, { passive: false });
+
+    // Initial and Resize Logic
+    function handleResize() {
+      if(beforeImage) {
+        beforeImage.style.width = slider.offsetWidth + 'px';
+      }
+    }
+    window.addEventListener('resize', handleResize);
+    handleResize();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Visible Results Slider",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "before_image",
+      "label": "Before Image",
+      "info": "Should show dandruff/scalp issues."
+    },
+    {
+      "type": "image_picker",
+      "id": "after_image",
+      "label": "After Image",
+      "info": "Should show clean scalp/healthy hair."
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "tag_text",
+      "label": "Tagline",
+      "default": "Scientific Transformation"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Visible Results"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtitle",
+      "default": "Real improvement in scalp condition with regular use."
+    },
+    {
+      "type": "text",
+      "id": "feature_title",
+      "label": "Feature Title",
+      "default": "Helps reduce visible dandruff over time"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Formulated with Neem Seed Kernel Extract to help maintain a clean scalp and reduce visible dandruff with consistent use.</p>"
+    },
+    {
+      "type": "text",
+      "id": "bullet_1",
+      "label": "Bullet Point 1",
+      "default": "Supports scalp health"
+    },
+    {
+      "type": "text",
+      "id": "bullet_2",
+      "label": "Bullet Point 2",
+      "default": "Targets scalp impurities"
+    },
+    {
+      "type": "text",
+      "id": "bullet_3",
+      "label": "Bullet Point 3",
+      "default": "Suitable for regular use"
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Disclaimer Text",
+      "default": "Results may vary depending on scalp condition and usage."
+    },
+    {
+      "type": "header",
+      "content": "CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button Text",
+      "default": "View Neem Seed Kernel Shampoo"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Visible Results Slider"
+    }
+  ]
+}
+{% endschema %}
