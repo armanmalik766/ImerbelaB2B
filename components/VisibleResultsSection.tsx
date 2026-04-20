@@ -1,6 +1,8 @@
 
 import React from 'react';
 import BeforeAfterSlider from './BeforeAfterSlider';
+import beforeImg from '../public/before1.png';
+import afterImg from '../public/after1.jpeg';
 
 interface VisibleResultsSectionProps {
   onCtaClick?: () => void;
@@ -13,10 +15,10 @@ const VisibleResultsSection: React.FC<VisibleResultsSectionProps> = ({ onCtaClic
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-center">
           
           {/* Left Side: The Visual Slider */}
-          <div className="w-full max-w-lg mx-auto md:max-w-none">
+          <div className="w-full max-w-md mx-auto">
             <BeforeAfterSlider 
-              beforeImage="./b.png" 
-              afterImage="./a.png" 
+              beforeImage={beforeImg} 
+              afterImage={afterImg} 
             />
           </div>
 

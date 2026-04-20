@@ -1,7 +1,7 @@
-
 import React, { useMemo } from 'react';
 import { Product, SectionSettings } from '../types';
-import { MOCK_PRODUCTS } from '../constants';
+import { getProducts } from '../services/api';
+import { Loader2 } from 'lucide-react';
 import ProductCard from './ProductCard';
 
 interface RelatedProductsProps {
@@ -11,11 +11,30 @@ interface RelatedProductsProps {
 }
 
 const RelatedProducts: React.FC<RelatedProductsProps> = ({ currentProduct, onProductClick, settings }) => {
+  const [products, setProducts] = React.useState<Product[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const fetch = async () => {
+      try {
+        const res = await getProducts(currentProduct.category);
+        if (res.success && res.data) {
+          setProducts(res.data);
+        }
+      } catch (err) {
+        console.error('Failed to fetch related products', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetch();
+  }, [currentProduct.category]);
+
   const related = useMemo(() => {
-    return MOCK_PRODUCTS
-      .filter(p => p.id !== currentProduct.id)
+    return products
+      .filter(p => p._id !== currentProduct._id)
       .slice(0, settings.limit);
-  }, [currentProduct, settings.limit]);
+  }, [products, currentProduct._id, settings.limit]);
 
   const isBestPair = (relatedProduct: Product) => {
     if (!settings.showPairingLabel) return false;
@@ -36,20 +55,31 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ currentProduct, onPro
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {related.map((product) => (
-            <div 
-              key={product.id} 
-              className="cursor-pointer"
-              onClick={() => onProductClick(product)}
-            >
-              <ProductCard 
-                product={product} 
-                isPaired={isBestPair(product)}
-              />
-            </div>
-          ))}
-        </div>
+        {loading ? (
+          <div className="flex flex-col items-center justify-center py-12">
+             <Loader2 className="w-6 h-6 animate-spin text-[#6B8E23] mb-4" />
+             <p className="text-sm text-gray-400 font-light italic">Finding routine complements...</p>
+          </div>
+        ) : related.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-sm text-gray-400 font-light">Explore our other categories for ritual pairings.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {related.map((product) => (
+              <div 
+                key={product._id} 
+                className="cursor-pointer"
+                onClick={() => onProductClick(product)}
+              >
+                <ProductCard 
+                  product={product} 
+                  isPaired={isBestPair(product)}
+                />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

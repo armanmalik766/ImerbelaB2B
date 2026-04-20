@@ -18,25 +18,25 @@ const CONCERNS: Concern[] = [
   {
     id: 'dandruff',
     label: 'Dandruff / Flaky Scalp',
-    imageUrl: '/im1.jpeg',
+    imageUrl: '/shampoo-150ml.png',
     targetProduct: MOCK_PRODUCTS[0]
   },
   {
     id: 'hair-fall',
     label: 'Hair Fall & Weak Roots',
-    imageUrl: '/im2.jpeg',
+    imageUrl: '/conditioner-150ml.png',
     targetProduct: MOCK_PRODUCTS[2]
   },
   {
     id: 'dry-scalp',
     label: 'Dry & Itchy Scalp',
-    imageUrl: '/im3.jpeg',
+    imageUrl: '/shampoo-150ml.png',
     targetProduct: MOCK_PRODUCTS[1]
   },
   {
     id: 'oily-scalp',
     label: 'Oily Scalp & Build-up',
-    imageUrl: '/im4.jpeg',
+    imageUrl: '/serum.jpeg',
     targetProduct: MOCK_PRODUCTS[0]
   }
 ];
