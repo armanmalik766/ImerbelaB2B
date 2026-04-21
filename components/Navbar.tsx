@@ -173,7 +173,7 @@ const Navbar: React.FC = () => {
                   className="flex items-center gap-4 px-4 py-3.5 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-xl transition-all"
                 >
                   <Package className="w-4 h-4 text-[#6B8E23]" />
-                  <span className="uppercase tracking-widest">Become a Partner</span>
+                  <span className="uppercase tracking-widest">Become a Seller</span>
                 </Link>
               )}
 
