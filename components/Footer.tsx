@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
           <h4 className="text-[10px] uppercase tracking-widest font-bold">Products</h4>
           <ul className="text-xs space-y-2 text-gray-400 uppercase tracking-tight">
             <li><Link to="/" className="hover:text-white transition-colors">All Products</Link></li>
-            <li><Link to="/bulk-order" className="hover:text-[#6B8E23] transition-colors font-medium">Bulk Order</Link></li>
+            <li><Link to="/bulk-order" className="hover:text-[#6B8E23] transition-colors font-medium">B2B Marketplace</Link></li>
             <li><button className="hover:text-white transition-colors">Bestsellers</button></li>
           </ul>
         </div>

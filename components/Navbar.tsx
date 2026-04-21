@@ -12,9 +12,9 @@ const Navbar: React.FC = () => {
   const { itemCount } = useCart();
 
   const navLinks = [
-    { href: 'https://imerbela.com', label: 'Main Website', external: true },
+    { href: 'https://imerbela.com', label: 'Retail Store', external: true },
     { to: '/wholesale', label: 'Seller' },
-    { to: '/bulk-order', label: 'Bulk Order' },
+    { to: '/bulk-order', label: 'B2B Marketplace' },
     ...(isAuthenticated ? [{ to: isAdmin ? '/admin' : '/seller-dashboard', label: 'Dashboard' }] : []),
     { to: '/contact', label: 'Contact' },
   ];

@@ -117,19 +117,6 @@ const AdminPanel: React.FC = () => {
     }
   }, [activeTab]);
 
-  if (authLoading || isLoading) {
-    return (
-      <div className="min-h-screen bg-[#F8F8F6] flex items-center justify-center p-4">
-        <div className="text-center space-y-4">
-          <Loader2 className="w-8 h-8 animate-spin text-[#6B8E23] mx-auto" />
-          <p className="text-gray-400 text-sm font-light italic">Accessing database...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!profile) return null;
-
   const fetchSellers = async () => {
     setIsLoading(true);
     setError('');
@@ -453,6 +440,19 @@ const AdminPanel: React.FC = () => {
       }
     );
   };
+
+  if (authLoading || isLoading) {
+    return (
+      <div className="min-h-screen bg-[#F8F8F6] flex items-center justify-center p-4">
+        <div className="text-center space-y-4">
+          <Loader2 className="w-8 h-8 animate-spin text-[#6B8E23] mx-auto" />
+          <p className="text-gray-400 text-sm font-light italic">Accessing database...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!profile) return null;
 
   return (
     <section className="min-h-screen bg-[#F8F8F6]">

@@ -120,11 +120,11 @@ const Wholesale: React.FC<WholesaleProps> = ({ onProductClick }) => {
           // Group products by base name (e.g. "shampoo-300ml") then pick the smallest bundle (3nos)
           const grouped: Record<string, Product> = {};
           response.data.forEach(p => {
-             const baseHandle = p.handle.split('-').slice(0, -1).join('-');
-             // Preference: pick '3nos' if available, else first one
-             if (!grouped[baseHandle] || p.handle.includes('3nos')) {
-               grouped[baseHandle] = p;
-             }
+            const baseHandle = p.handle.split('-').slice(0, -1).join('-');
+            // Preference: pick '3nos' if available, else first one
+            if (!grouped[baseHandle] || p.handle.includes('3nos')) {
+              grouped[baseHandle] = p;
+            }
           });
           setProducts(Object.values(grouped));
         }
@@ -359,7 +359,7 @@ const Wholesale: React.FC<WholesaleProps> = ({ onProductClick }) => {
               to="/bulk-order"
               className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-[#6B8E23] border-b border-[#6B8E23] pb-1 hover:text-[#111111] hover:border-[#111111] transition-all self-start md:self-auto"
             >
-              View Full Catalog
+              View Full Catalogue
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>

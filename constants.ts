@@ -15,15 +15,17 @@ export const MOCK_PRODUCTS: Product[] = [
     tags: ['haircare', 'scalp-care', 'cleanse'],
     description: 'A science-backed cleanser formulated with high-purity Neem Seed Kernel extract, Eclipta Alba, and Shikakai to address the root causes of scalp imbalance while maintaining hair integrity.',
     howToUse: [
-      'Apply to wet hair and scalp.',
-      'Massage gently to create a rich lather.',
-      'Rinse thoroughly with lukewarm water.',
-      'Follow with IMERBELA Conditioner for best results.'
+      'Direction to use IMERBELA Neem Seed Kernel Shampoo',
+      '1.\tWet hair and scalp thoroughly with water.',
+      '2.\tTake an adequate amount of IMERBELA Neem Seed Kernel Shampoo in your palm.',
+      '3.\tApply evenly on scalp and hair.',
+      '4.\tGently massage with fingertips to form a rich lather.',
+      '5.\tLeave on for 1–2 minutes for better scalp cleansing.',
+      '6.\tRinse thoroughly with water.',
+      '7.\tRepeat if required.'
     ],
     ingredients: [
-      { name: 'Neem Seed Kernel', benefit: 'Anti-bacterial and anti-fungal properties for scalp health.' },
-      { name: 'Bhringraj (Eclipta Alba)', benefit: 'Ancient herb known for hair regrowth and scalp cooling.' },
-      { name: 'Shikakai', benefit: 'Natural cleanser that strengthens hair roots.' }
+      { name: 'IMERBELA Neem Seed Kernel Shampoo', benefit: 'Aqua, Neem seed kernel Extract (Azadirachta indica), Bhringraj (Eclipta alba) whole plant extract, Shikakai (Acacia concinna) pod extract, Amla (Emblica officinalis) fruit extract, Aloe vera (Aloe barbadensis) Gel, Decyl glucoside, coco glucoside, Herbal Conditioning agents (vegetable Glycerin), sodium benzoate and potassium sorbate (preservative), Permitted herbal Fragrance.' }
     ],
     faqs: [
       { q: 'Is it safe for color-treated hair?', a: 'Yes, our sulfate-free formula is gentle on color-treated hair.' },
@@ -50,15 +52,17 @@ export const MOCK_PRODUCTS: Product[] = [
     tags: ['haircare', 'scalp-care', 'cleanse', 'daily-use'],
     description: 'A compact format of our Neem Seed Kernel Shampoo for faster sell-through and trial packs.',
     howToUse: [
-      'Apply to wet hair and scalp.',
-      'Massage gently to create a rich lather.',
-      'Rinse thoroughly with lukewarm water.',
-      'Follow with IMERBELA Conditioner for best results.'
+      'Direction to use IMERBELA Neem Seed Kernel Shampoo',
+      '1.\tWet hair and scalp thoroughly with water.',
+      '2.\tTake an adequate amount of IMERBELA Neem Seed Kernel Shampoo in your palm.',
+      '3.\tApply evenly on scalp and hair.',
+      '4.\tGently massage with fingertips to form a rich lather.',
+      '5.\tLeave on for 1–2 minutes for better scalp cleansing.',
+      '6.\tRinse thoroughly with water.',
+      '7.\tRepeat if required.'
     ],
     ingredients: [
-      { name: 'Neem Seed Kernel', benefit: 'Anti-bacterial and anti-fungal properties for scalp health.' },
-      { name: 'Bhringraj (Eclipta Alba)', benefit: 'Ancient herb known for hair regrowth and scalp cooling.' },
-      { name: 'Shikakai', benefit: 'Natural cleanser that strengthens hair roots.' }
+      { name: 'IMERBELA Neem Seed Kernel Shampoo', benefit: 'Aqua, Neem seed kernel Extract (Azadirachta indica), Bhringraj (Eclipta alba) whole plant extract, Shikakai (Acacia concinna) pod extract, Amla (Emblica officinalis) fruit extract, Aloe vera (Aloe barbadensis) Gel, Decyl glucoside, coco glucoside, Herbal Conditioning agents (vegetable Glycerin), sodium benzoate and potassium sorbate (preservative), Permitted herbal Fragrance.' }
     ],
     faqs: [
       { q: 'Is this suitable for travel retail packs?', a: 'Yes, 150ml is ideal for trial and travel formats.' }
@@ -84,15 +88,15 @@ export const MOCK_PRODUCTS: Product[] = [
     tags: ['haircare', 'hydrate', 'condition'],
     description: 'A weightless conditioner that deeply hydrates without leaving residue. It works in synergy with our shampoo to lock in moisture and smooth the hair cuticle.',
     howToUse: [
-      'After shampooing, apply to hair lengths and ends.',
-      'Leave on for 2-3 minutes.',
-      'Rinse thoroughly.',
-      'Use daily for optimal softness.'
+      'How to Use',
+      '1.\tAfter shampooing, apply an adequate amount of IMERBELA Neem Seed Kernel Conditioner to wet hair.',
+      '2.\tGently massage into hair lengths and ends.',
+      '3.\tLeave on for 2–3 minutes.',
+      '4.\tRinse thoroughly with clean water.',
+      '5.\tFor best results, use regularly along with IMERBELA Neem Seed Kernel Shampoo.'
     ],
     ingredients: [
-      { name: 'Neem Oil', benefit: 'Adds a protective layer to the hair shaft.' },
-      { name: 'Coconut Oil', benefit: 'Penetrates deep into the cortex for moisture.' },
-      { name: 'Shea Butter', benefit: 'Softens hair and reduces frizz.' }
+      { name: 'IMERBELA Neem Seed Kernel Conditioner', benefit: 'Aqua, Neem seed kernel Extract (Azadirachta indica), Aloe vera (Aloe barbadensis) Gel, Herbal Conditioning Agents (vegetable glycerine), herbal conditioning base, Natural Emollients, sodium benzoate and potassium sorbate (preservative), Permitted herbal Fragrance.' }
     ],
     faqs: [
       { q: 'Will it weigh down fine hair?', a: 'No, our formula is designed to be lightweight and easily rinsed.' },
@@ -119,15 +123,15 @@ export const MOCK_PRODUCTS: Product[] = [
     tags: ['haircare', 'hydrate', 'condition', 'daily-use'],
     description: 'A compact format of our Neem Seed Kernel Conditioner for daily-use retail and combo bundles.',
     howToUse: [
-      'After shampooing, apply to hair lengths and ends.',
-      'Leave on for 2-3 minutes.',
-      'Rinse thoroughly.',
-      'Use daily for optimal softness.'
+      'How to Use',
+      '1.\tAfter shampooing, apply an adequate amount of IMERBELA Neem Seed Kernel Conditioner to wet hair.',
+      '2.\tGently massage into hair lengths and ends.',
+      '3.\tLeave on for 2–3 minutes.',
+      '4.\tRinse thoroughly with clean water.',
+      '5.\tFor best results, use regularly along with IMERBELA Neem Seed Kernel Shampoo.'
     ],
     ingredients: [
-      { name: 'Neem Oil', benefit: 'Adds a protective layer to the hair shaft.' },
-      { name: 'Coconut Oil', benefit: 'Penetrates deep into the cortex for moisture.' },
-      { name: 'Shea Butter', benefit: 'Softens hair and reduces frizz.' }
+      { name: 'IMERBELA Neem Seed Kernel Conditioner', benefit: 'Aqua, Neem seed kernel Extract (Azadirachta indica), Aloe vera (Aloe barbadensis) Gel, Herbal Conditioning Agents (vegetable glycerine), herbal conditioning base, Natural Emollients, sodium benzoate and potassium sorbate (preservative), Permitted herbal Fragrance.' }
     ],
     faqs: [
       { q: 'Is this ideal for starter bundles?', a: 'Yes, 150ml variant is ideal for starter and trial bundles.' }
@@ -153,13 +157,23 @@ export const MOCK_PRODUCTS: Product[] = [
     tags: ['haircare', 'scalp-care', 'treatment', 'regrowth'],
     description: 'A potent, lightweight serum enriched with Ginseng and Pro-Vitamin B5. Designed for daily leave-on application to stimulate the scalp.',
     howToUse: [
-      'Apply to scalp nighty.',
-      'Massage gently.',
-      'Do not rinse.'
+      'Directions for Use /How to Use',
+      'IMERBELA Neem Seed Kernel Hair Growth Serum',
+      '1.\tPrepare the Scalp',
+      'For best results, apply on a clean scalp after washing. The Hair Growth serum can be used on a slightly damp scalp or on a dry scalp as well.',
+      '2.\tSection the Hair',
+      'Divide hair into small, manageable sections so the dropper reaches the scalp directly, not just the hair strands.',
+      '3.\tApply the Hair Growth Serum',
+      'Using the dropper, apply 2–3 drops directly onto the scalp in each section. Focus on areas of concern such as the hairline, crown, or thinning zones.',
+      '4.\tMassage Gently Hair Growth Serum',
+      'Massage the Hair Growth serum into the scalp using fingertips in gentle circular motions for 2–3 minutes to help improve circulation and absorption.',
+      '5.\tLeave-In Treatment',
+      'Do not rinse. Leave the Hair Growth Serum on to allow the active ingredients to work effectively.',
+      '6.\tUsage Frequency',
+      'Use 3–4 drops (pea-sized amount) per application on average. Quantity may vary depending on scalp condition and hair density.'
     ],
     ingredients: [
-      { name: 'Ginseng Root', benefit: 'Increases dermal cells on the scalp.' },
-      { name: 'Pro-Vitamin B5', benefit: 'Essential nutrients for thickness.' }
+      { name: 'IMERBELA Neem Seed Kernel Hair Growth Serum', benefit: 'Aqua, Neem seed kernel Extract (Azadirachta indica), Ginseng (Panax Ginseng) Root Extract, Burdock (Arctium Majus) Root Extract, Hydrolyzed Soy Protein, provitamin B5, Aloe vera (Aloe barbadensis) gel, plant keratin, plant-based Biotin, vegetable glycerin, sodium Benzoate and potassium sorbate (preservative), Permitted herbal Fragrance.' }
     ],
     faqs: [
       { q: 'Does it feel greasy?', a: 'No, it is an aqueous, non-oily formula.' }
@@ -185,14 +199,41 @@ export const MOCK_PRODUCTS: Product[] = [
     tags: ['haircare', 'combo', 'regimen', 'starter-kit'],
     description: 'A complete hair care combo with shampoo, conditioner, and serum designed for high-value reseller bundles.',
     howToUse: [
-      'Cleanse scalp and hair with Shampoo.',
-      'Apply Conditioner on lengths and rinse.',
-      'Use Serum as leave-on scalp treatment.'
+      'Direction to use IMERBELA Neem Seed Kernel Shampoo',
+      '1.\tWet hair and scalp thoroughly with water.',
+      '2.\tTake an adequate amount of IMERBELA Neem Seed Kernel Shampoo in your palm.',
+      '3.\tApply evenly on scalp and hair.',
+      '4.\tGently massage with fingertips to form a rich lather.',
+      '5.\tLeave on for 1–2 minutes for better scalp cleansing.',
+      '6.\tRinse thoroughly with water.',
+      '7.\tRepeat if required.',
+      '',
+      'How to Use',
+      '1.\tAfter shampooing, apply an adequate amount of IMERBELA Neem Seed Kernel Conditioner to wet hair.',
+      '2.\tGently massage into hair lengths and ends.',
+      '3.\tLeave on for 2–3 minutes.',
+      '4.\tRinse thoroughly with clean water.',
+      '5.\tFor best results, use regularly along with IMERBELA Neem Seed Kernel Shampoo.',
+      '',
+      'Directions for Use /How to Use',
+      'IMERBELA Neem Seed Kernel Hair Growth Serum',
+      '1.\tPrepare the Scalp',
+      'For best results, apply on a clean scalp after washing. The Hair Growth serum can be used on a slightly damp scalp or on a dry scalp as well.',
+      '2.\tSection the Hair',
+      'Divide hair into small, manageable sections so the dropper reaches the scalp directly, not just the hair strands.',
+      '3.\tApply the Hair Growth Serum',
+      'Using the dropper, apply 2–3 drops directly onto the scalp in each section. Focus on areas of concern such as the hairline, crown, or thinning zones.',
+      '4.\tMassage Gently Hair Growth Serum',
+      'Massage the Hair Growth serum into the scalp using fingertips in gentle circular motions for 2–3 minutes to help improve circulation and absorption.',
+      '5.\tLeave-In Treatment',
+      'Do not rinse. Leave the Hair Growth Serum on to allow the active ingredients to work effectively.',
+      '6.\tUsage Frequency',
+      'Use 3–4 drops (pea-sized amount) per application on average. Quantity may vary depending on scalp condition and hair density.'
     ],
     ingredients: [
-      { name: 'Neem Seed Kernel Shampoo', benefit: 'Cleanses and balances scalp.' },
-      { name: 'Neem Seed Kernel Conditioner', benefit: 'Hydrates and smoothens hair.' },
-      { name: 'Neem Seed Kernel Serum', benefit: 'Supports scalp health and hair roots.' }
+      { name: 'IMERBELA Neem Seed Kernel Shampoo', benefit: 'Aqua, Neem seed kernel Extract (Azadirachta indica), Bhringraj (Eclipta alba) whole plant extract, Shikakai (Acacia concinna) pod extract, Amla (Emblica officinalis) fruit extract, Aloe vera (Aloe barbadensis) Gel, Decyl glucoside, coco glucoside, Herbal Conditioning agents (vegetable Glycerin), sodium benzoate and potassium sorbate (preservative), Permitted herbal Fragrance.' },
+      { name: 'IMERBELA Neem Seed Kernel Conditioner', benefit: 'Aqua, Neem seed kernel Extract (Azadirachta indica), Aloe vera (Aloe barbadensis) Gel, Herbal Conditioning Agents (vegetable glycerine), herbal conditioning base, Natural Emollients, sodium benzoate and potassium sorbate (preservative), Permitted herbal Fragrance.' },
+      { name: 'IMERBELA Neem Seed Kernel Hair Growth Serum', benefit: 'Aqua, Neem seed kernel Extract (Azadirachta indica), Ginseng (Panax Ginseng) Root Extract, Burdock (Arctium Majus) Root Extract, Hydrolyzed Soy Protein, provitamin B5, Aloe vera (Aloe barbadensis) gel, plant keratin, plant-based Biotin, vegetable glycerin, sodium Benzoate and potassium sorbate (preservative), Permitted herbal Fragrance.' }
     ],
     faqs: [
       { q: 'What does this kit include?', a: 'Shampoo 150ml, Conditioner 150ml, and Serum 15ml.' }

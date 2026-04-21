@@ -91,7 +91,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onProductClick }
               <div className="absolute top-4 left-4 flex flex-col gap-2">
                 <span className="bg-[#6B8E23] text-white text-[9px] uppercase tracking-widest px-3 py-1.5 font-bold rounded-sm flex items-center gap-1.5 shadow-lg">
                   <Package className="w-3.5 h-3.5" />
-                  Wholesale Pack
+                  Seller Pack
                 </span>
               </div>
             )}
@@ -397,6 +397,13 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onProductClick }
                   <img src="/serumBanner5.jpeg" alt="" className="w-full h-auto object-cover" />
                   <img src="/serumBanner6.jpeg" alt="" className="w-full h-auto object-cover" />
                 </>
+              ) : product.title.toLowerCase().includes('kit') ? (
+                <>
+                  <img src="/kitBanner1.png" alt="" className="w-full h-auto object-cover" />
+                  <img src="/kitBanner2.jpeg" alt="" className="w-full h-auto object-cover" />
+                  <img src="/kitBanner3.jpeg" alt="" className="w-full h-auto object-cover" />
+                  <img src="/kitBanner4.jpeg" alt="" className="w-full h-auto object-cover" />
+                </>
               ) : (
                 <div className="max-w-4xl">
                   <p className="text-gray-500 font-light leading-relaxed text-sm md:text-base">
@@ -408,28 +415,60 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onProductClick }
           )}
 
           {activeTab === 'info' && (
-            <div className="max-w-4xl space-y-12">
-              <div className="space-y-6">
-                <h3 className="text-sm font-bold uppercase tracking-widest text-[#111111] border-l-2 border-[#6B8E23] pl-4">Full Ingredients</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="w-full space-y-16 animate-fadeIn pb-12 mt-4 md:mt-8">
+              <div className="w-full">
+                <h3 className="text-[12px] md:text-[13px] font-bold uppercase tracking-[0.2em] text-[#111111] border-b border-gray-200 pb-4 mb-6 md:mb-8">
+                  Full Botanical Ingredients
+                </h3>
+                <div className="w-full">
                   {product.ingredients.map((ing, i) => (
-                    <div key={i} className="group">
-                      <span className="block text-[11px] font-bold uppercase tracking-tight text-[#111111] mb-2 group-hover:text-[#6B8E23] transition-colors">{ing.name}</span>
-                      <p className="text-sm text-gray-500 font-light leading-relaxed">{ing.benefit}</p>
+                    <div key={i} className="mb-4">
+                      <p className="text-[14px] md:text-[15px] text-gray-600 font-light leading-[2] tracking-wide">
+                        <strong className="text-[#111111] font-medium mr-2">{ing.name}</strong> 
+                        {ing.benefit}
+                      </p>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="space-y-6 pt-8 border-t border-gray-50">
-                <h3 className="text-sm font-bold uppercase tracking-widest text-[#111111] border-l-2 border-[#6B8E23] pl-4">Application Guide</h3>
-                <div className="space-y-4">
-                  {product.howToUse.map((step, i) => (
-                    <div key={i} className="flex gap-6 items-start">
-                      <span className="text-[#6B8E23] font-bold text-[10px] uppercase tracking-tighter shrink-0 pt-1">Step {i + 1}</span>
-                      <p className="text-sm text-gray-500 font-light leading-relaxed">{step}</p>
-                    </div>
-                  ))}
+              <div className="w-full pt-4">
+                <h3 className="text-[12px] md:text-[13px] font-bold uppercase tracking-[0.2em] text-[#111111] border-b border-gray-200 pb-4 mb-6 md:mb-8">
+                  Application Guide
+                </h3>
+                <div className="w-full">
+                  <div className="space-y-1">
+                    {product.howToUse.map((step, i) => {
+                      const isMainHeader = step.includes('Direction to use') || step.includes('How to Use') || step.includes('Directions for Use');
+                      const isSubHeader = step === 'SHAMPOO' || step === 'CONDITIONER' || step === 'SERUM' || step === 'IMERBELA Neem Seed Kernel Hair Growth Serum';
+                      const isSpacing = step.trim() === '';
+                      
+                      if (isSpacing) {
+                        return <div key={i} className="h-6 w-full"></div>;
+                      }
+
+                      if (isMainHeader || isSubHeader) {
+                        return (
+                          <div key={i} className="pt-6 first:pt-0 pb-2">
+                            <h4 className="text-[13px] md:text-[14px] font-bold text-[#111111] uppercase tracking-[0.1em]">
+                              {step}
+                            </h4>
+                          </div>
+                        );
+                      }
+
+                      // Check if it's a numbered instruction e.g. 1., 2.
+                      const isNumberedListing = /^\d+\./.test(step.trim());
+
+                      return (
+                        <div key={i} className="w-full py-1.5">
+                          <p className={`text-[14px] md:text-[15px] leading-[1.8] whitespace-pre-wrap ${isNumberedListing ? 'text-[#333333] font-normal' : 'pl-0 md:pl-5 text-gray-500 font-light'}`}>
+                            {step}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
