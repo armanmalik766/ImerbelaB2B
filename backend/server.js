@@ -12,8 +12,20 @@ const orderRoutes = require('./routes/orderRoutes');
 const app = express();
 
 // Middleware
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "https://imerbela-b2-b.vercel.app"
+];
+
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173', 'http://127.0.0.1:3000', 'http://127.0.0.1:5173'],
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
 }));
 app.use(express.json());
@@ -24,6 +36,11 @@ app.use('/api/seller', sellerRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
+
+// Root route
+app.get("/", (req, res) => {
+  res.send("Backend Running 🚀");
+});
 
 // Health check
 app.get('/api/health', (req, res) => {
@@ -50,7 +67,7 @@ mongoose
     console.log('✅ MongoDB connected successfully');
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);
-      console.log(`   Health: http://localhost:${PORT}/api/health`);
+      console.log(`   Health endpoint ready`);
     });
   })
   .catch((err) => {
