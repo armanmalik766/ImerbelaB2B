@@ -13,12 +13,12 @@ const VisibleResultsSection: React.FC<VisibleResultsSectionProps> = ({ onCtaClic
     <section className="py-24 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-center">
-          
+
           {/* Left Side: The Visual Slider */}
           <div className="w-full max-w-md mx-auto">
-            <BeforeAfterSlider 
-              beforeImage={beforeImg} 
-              afterImage={afterImg} 
+            <BeforeAfterSlider
+              beforeImage={beforeImg}
+              afterImage={afterImg}
             />
           </div>
 
@@ -62,7 +62,7 @@ const VisibleResultsSection: React.FC<VisibleResultsSectionProps> = ({ onCtaClic
               </p>
 
               <div className="pt-4">
-                <button 
+                <button
                   onClick={onCtaClick}
                   className="bg-black text-white px-8 py-4 text-[12px] font-medium tracking-widest hover:bg-gray-800 transition-all uppercase rounded-sm"
                 >
@@ -79,3 +79,5 @@ const VisibleResultsSection: React.FC<VisibleResultsSectionProps> = ({ onCtaClic
 };
 
 export default VisibleResultsSection;
+
+//push code .....//
