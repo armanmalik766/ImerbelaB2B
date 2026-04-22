@@ -13,10 +13,10 @@ const Footer: React.FC = () => {
           </Link>
           <div className="flex items-center justify-center md:justify-start gap-1.5 mb-4">
             <Package className="w-3 h-3 text-[#6B8E23]" />
-            <span className="text-[9px] uppercase tracking-widest text-[#6B8E23] font-bold">B2B Wholesale</span>
+            <span className="text-[9px] uppercase tracking-widest text-[#6B8E23] font-bold">B2B Seller</span>
           </div>
           <p className="text-gray-400 text-xs leading-relaxed max-w-xs mx-auto md:mx-0">
-            Science-backed, minimalist hair care powered by the ancient wisdom of Neem. Exclusively for wholesale partners.
+            Science-backed, minimalist hair care powered by the ancient wisdom of Neem. Exclusively for seller partners.
           </p>
         </div>
 
@@ -30,9 +30,9 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="space-y-4">
-          <h4 className="text-[10px] uppercase tracking-widest font-bold">Wholesale</h4>
+          <h4 className="text-[10px] uppercase tracking-widest font-bold">Seller</h4>
           <ul className="text-xs space-y-2 text-gray-400 uppercase tracking-tight">
-            <li><Link to="/wholesale" className="hover:text-[#6B8E23] transition-colors font-medium">Wholesale Hub</Link></li>
+            <li><Link to="/seller" className="hover:text-[#6B8E23] transition-colors font-medium">Seller Hub</Link></li>
             <li><Link to="/distributor-program" className="hover:text-[#6B8E23] transition-colors font-medium">Distributor Program</Link></li>
             <li><Link to="/become-seller" className="hover:text-[#6B8E23] transition-colors font-medium">Become a Seller</Link></li>
             <li><Link to="/seller-login" className="hover:text-white transition-colors">B2B Login</Link></li>
@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
         <div className="space-y-4">
           <h4 className="text-[10px] uppercase tracking-widest font-bold">Policies</h4>
           <ul className="text-xs space-y-2 text-gray-400 uppercase tracking-tight">
-            <li><button className="hover:text-white transition-colors">Wholesale Terms</button></li>
+            <li><button className="hover:text-white transition-colors">Seller Terms</button></li>
             <li><button className="hover:text-white transition-colors">Shipping</button></li>
             <li><button className="hover:text-white transition-colors">Returns</button></li>
             <li><button className="hover:text-white transition-colors">Privacy</button></li>
@@ -69,7 +69,7 @@ const Footer: React.FC = () => {
           ))}
         </div>
         <p className="text-gray-400 text-[10px] tracking-widest uppercase text-center">
-          © 2024 Imerbela. Wholesale B2B Platform. Minimal. Science-Led. Honest.
+          © 2024 Imerbela. Seller B2B Platform. Minimal. Science-Led. Honest.
         </p>
       </div>
     </footer>

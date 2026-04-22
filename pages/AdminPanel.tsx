@@ -988,7 +988,7 @@ const AdminPanel: React.FC = () => {
                 <h2 className="text-3xl md:text-4xl font-light tracking-tight text-[#111111]">
                   Product <span className="font-serif italic text-gray-400">Inventory</span>
                 </h2>
-                <p className="text-sm text-gray-400 font-light">Manage your wholesale product catalog, pricing, and visibility</p>
+                <p className="text-sm text-gray-400 font-light">Manage your seller product catalog, pricing, and visibility</p>
               </div>
               <div className="flex items-center gap-3">
                 <button
@@ -1225,7 +1225,7 @@ const AdminPanel: React.FC = () => {
                 <div className="space-y-4 col-span-1 md:col-span-2 p-4 md:p-6 bg-[#F8F8F6] rounded-2xl border border-gray-100">
                   <div className="flex items-center justify-between">
                     <div>
-                      <label className="text-[10px] uppercase tracking-widest font-bold text-gray-500">Wholesale Pricing Tiers</label>
+                      <label className="text-[10px] uppercase tracking-widest font-bold text-gray-500">Seller Pricing Tiers</label>
                       <p className="text-[9px] text-gray-400">Show price per pack to sellers (e.g. 3 units for ₹957)</p>
                     </div>
                     <button 

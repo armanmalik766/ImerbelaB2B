@@ -14,9 +14,9 @@ const products = [
     moq: 5,
     isActive: true,
     bulkPricing: [
-      { minQty: 5, maxQty: 20, price: 449, label: 'Standard Wholesale' },
+      { minQty: 5, maxQty: 20, price: 449, label: 'Standard Seller' },
       { minQty: 21, maxQty: 50, price: 399, label: 'Bulk Discount' },
-      { minQty: 51, maxQty: null, price: 349, label: 'Tier 1 Wholesale' }
+      { minQty: 51, maxQty: null, price: 349, label: 'Tier 1 Seller' }
     ]
   },
   {
@@ -30,7 +30,7 @@ const products = [
     moq: 5,
     isActive: true,
     bulkPricing: [
-      { minQty: 5, maxQty: 20, price: 539, label: 'Standard Wholesale' },
+      { minQty: 5, maxQty: 20, price: 539, label: 'Standard Seller' },
       { minQty: 21, maxQty: null, price: 479, label: 'Bulk Discount' }
     ]
   },
@@ -45,7 +45,7 @@ const products = [
     moq: 10,
     isActive: true,
     bulkPricing: [
-      { minQty: 10, maxQty: 30, price: 674, label: 'Standard Wholesale' },
+      { minQty: 10, maxQty: 30, price: 674, label: 'Standard Seller' },
       { minQty: 31, maxQty: null, price: 599, label: 'Bulk Discount' }
     ]
   },
@@ -60,7 +60,7 @@ const products = [
     moq: 10,
     isActive: true,
     bulkPricing: [
-      { minQty: 10, maxQty: null, price: 349, label: 'Fixed Wholesale' }
+      { minQty: 10, maxQty: null, price: 349, label: 'Fixed Seller' }
     ]
   }
 ];

@@ -241,6 +241,7 @@ export interface PlacedOrder {
   razorpayOrderId?: string;
   razorpayPaymentId?: string;
   razorpaySignature?: string;
+  shippingAddress: ShippingAddress;
   createdAt: string;
   updatedAt: string;
 }
@@ -297,6 +298,9 @@ export const getOrders = (status?: string) => {
   const query = params.toString() ? `?${params.toString()}` : '';
   return apiRequest<PlacedOrder[]>(`/api/orders${query}`);
 };
+
+export const getOrderById = (id: string) =>
+  apiRequest<PlacedOrder>(`/api/orders/${id}`);
 
 export const getAllOrdersAdmin = (status?: OrderStatus | 'all', search?: string) => {
   const params = new URLSearchParams();

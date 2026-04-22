@@ -44,7 +44,7 @@ const Cart: React.FC = () => {
             Login <span className="font-serif italic text-gray-400">Required</span>
           </h2>
           <p className="text-sm text-gray-500 font-light mb-6">
-            Cart is available only for approved wholesale partners.
+            Cart is available only for approved seller partners.
           </p>
           <Link
             to="/seller-login"
@@ -68,7 +68,7 @@ const Cart: React.FC = () => {
             Your Cart is <span className="font-serif italic text-gray-400">Empty</span>
           </h2>
           <p className="text-sm text-gray-500 font-light mb-6">
-            Browse our products and add items to your wholesale cart.
+            Browse our products and add items to your seller cart.
           </p>
           <Link
             to="/"
@@ -95,7 +95,7 @@ const Cart: React.FC = () => {
               Continue Shopping
             </Link>
             <h1 className="text-3xl md:text-4xl font-light tracking-tight text-[#111111]">
-              Wholesale <span className="font-serif italic text-gray-400">Cart</span>
+              Seller <span className="font-serif italic text-gray-400">Cart</span>
             </h1>
             <p className="text-sm text-gray-400 mt-1">{itemCount} units across {items.length} products</p>
           </div>
@@ -298,7 +298,7 @@ const Cart: React.FC = () => {
                 ) : (
                   <>
                     <Package className="w-4 h-4" />
-                    Place Wholesale Order
+                    Place Seller Order
                   </>
                 )}
               </button>

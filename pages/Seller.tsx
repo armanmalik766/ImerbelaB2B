@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { getProducts, Product } from '../services/api';
-import ProductCard from '../components/ProductCard';
-import { Loader2 } from 'lucide-react';
 import {
   Package,
   Truck,
@@ -20,8 +17,7 @@ import {
   Leaf,
 } from 'lucide-react';
 
-interface WholesaleProps {
-  onProductClick: (product: Product) => void;
+interface SellerProps {
 }
 
 const TRUST_STATS = [
@@ -78,7 +74,7 @@ const HOW_IT_WORKS = [
   {
     step: '03',
     title: 'Order in Bulk',
-    desc: 'Access wholesale pricing, place bulk orders directly from your seller dashboard.',
+    desc: 'Access seller pricing, place bulk orders directly from your seller dashboard.',
   },
   {
     step: '04',
@@ -91,7 +87,7 @@ const TESTIMONIALS = [
   {
     name: 'Priya Sharma',
     business: 'Ayur Beauty Store, Delhi',
-    text: 'IMERBELA products fly off our shelves. The wholesale margins are the best I\'ve seen in the Ayurvedic segment. Reordering is seamless.',
+    text: 'IMERBELA products fly off our shelves. The seller margins are the best I\'ve seen in the Ayurvedic segment. Reordering is seamless.',
     rating: 5,
   },
   {
@@ -108,35 +104,7 @@ const TESTIMONIALS = [
   },
 ];
 
-const Wholesale: React.FC<WholesaleProps> = ({ onProductClick }) => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await getProducts();
-        if (response.success && response.data) {
-          // Group products by base name (e.g. "shampoo-300ml") then pick the smallest bundle (3nos)
-          const grouped: Record<string, Product> = {};
-          response.data.forEach(p => {
-            const baseHandle = p.handle.split('-').slice(0, -1).join('-');
-            // Preference: pick '3nos' if available, else first one
-            if (!grouped[baseHandle] || p.handle.includes('3nos')) {
-              grouped[baseHandle] = p;
-            }
-          });
-          setProducts(Object.values(grouped));
-        }
-      } catch (error) {
-        console.error('Failed to fetch products:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProducts();
-  }, []);
-
+const Seller: React.FC<SellerProps> = () => {
   return (
     <div className="animate-in fade-in duration-700">
       {/* ═══ HERO SECTION ═══ */}
@@ -158,14 +126,14 @@ const Wholesale: React.FC<WholesaleProps> = ({ onProductClick }) => {
               <div className="flex items-center gap-3">
                 <div className="h-[1px] w-12 bg-[#6B8E23]"></div>
                 <span className="text-[10px] uppercase tracking-[0.4em] text-[#6B8E23] font-bold">
-                  B2B Wholesale Platform
+                  B2B Seller Platform
                 </span>
               </div>
 
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight leading-[0.9] text-[#111111]">
                 India's Premium{' '}
                 <span className="block font-serif italic text-[#6B8E23] mt-2">
-                  Ayurvedic Wholesale
+                  Ayurvedic Seller
                 </span>
                 <span className="block mt-2">Partner.</span>
               </h1>
@@ -200,7 +168,7 @@ const Wholesale: React.FC<WholesaleProps> = ({ onProductClick }) => {
                   <img
                     src="/shampoo-150ml.png"
                     className="w-full h-full object-cover opacity-90 mix-blend-luminosity hover:opacity-100 hover:mix-blend-normal transition-all duration-1000"
-                    alt="IMERBELA Wholesale Products"
+                    alt="IMERBELA Seller Products"
                   />
                 </div>
                 {/* Floating stat card */}
@@ -339,55 +307,6 @@ const Wholesale: React.FC<WholesaleProps> = ({ onProductClick }) => {
         </div>
       </section>
 
-      {/* ═══ FEATURED PRODUCTS (B2B) ═══ */}
-      <section className="py-24 md:py-32 bg-[#FAFAF9]">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-4">
-            <div>
-              <span className="text-[10px] uppercase tracking-[0.3em] text-[#6B8E23] font-bold block mb-4">
-                Product Catalog
-              </span>
-              <h2 className="text-4xl md:text-5xl font-light tracking-tight text-[#111111]">
-                Wholesale{' '}
-                <span className="font-serif italic text-gray-400">Products</span>
-              </h2>
-              <p className="text-gray-500 font-light mt-3 max-w-lg">
-                Premium Ayurvedic haircare formulations. Login to view wholesale pricing and bulk discounts.
-              </p>
-            </div>
-            <Link
-              to="/bulk-order"
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-[#6B8E23] border-b border-[#6B8E23] pb-1 hover:text-[#111111] hover:border-[#111111] transition-all self-start md:self-auto"
-            >
-              View Full Catalogue
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-            {loading ? (
-              <div className="col-span-full py-20 text-center">
-                <Loader2 className="w-8 h-8 animate-spin text-[#6B8E23] mx-auto mb-4" />
-                <p className="text-gray-400 text-sm italic">Sourcing premium products...</p>
-              </div>
-            ) : products.length === 0 ? (
-              <div className="col-span-full py-20 text-center">
-                <p className="text-gray-400 text-sm">No wholesale products found.</p>
-              </div>
-            ) : (
-              products.map((product) => (
-                <div
-                  key={product._id}
-                  onClick={() => onProductClick(product)}
-                  className="cursor-pointer"
-                >
-                  <ProductCard product={product} />
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-      </section>
 
       {/* ═══ TESTIMONIALS ═══ */}
       <section className="py-24 md:py-32 bg-[#111111] text-white relative overflow-hidden">
@@ -442,22 +361,22 @@ const Wholesale: React.FC<WholesaleProps> = ({ onProductClick }) => {
             <span className="font-serif italic text-gray-400">Grow?</span>
           </h2>
           <p className="text-gray-500 font-light text-lg max-w-xl mx-auto mb-10 leading-relaxed">
-            Join India's fastest-growing Ayurvedic wholesale network.
+            Join India's fastest-growing Ayurvedic seller network.
             Premium products, unbeatable margins, and dedicated support.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/become-seller"
-              className="bg-[#111111] text-white px-12 py-5 text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#6B8E23] transition-all rounded-sm shadow-sm inline-flex items-center justify-center gap-2"
+              className="bg-[#6B8E23] text-white px-12 py-5 text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#7da028] transition-all rounded-sm shadow-lg shadow-[#6B8E23]/20 inline-flex items-center justify-center gap-2"
             >
-              Apply Now — It's Free
+              Become a Seller
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              to="/distributor-program"
-              className="border border-[#111111] text-[#111111] px-12 py-5 text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#111111] hover:text-white transition-all rounded-sm inline-flex items-center justify-center"
+              to="/seller-login"
+              className="border border-[#111111]/20 text-[#111111] px-12 py-5 text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#111111] hover:text-white transition-all rounded-sm inline-flex items-center justify-center backdrop-blur-sm"
             >
-              Distributor Program
+              Login as Seller
             </Link>
           </div>
           <p className="mt-8 text-xs text-gray-400">
@@ -469,4 +388,4 @@ const Wholesale: React.FC<WholesaleProps> = ({ onProductClick }) => {
   );
 };
 
-export default Wholesale;
+export default Seller;

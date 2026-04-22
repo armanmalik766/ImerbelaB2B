@@ -271,7 +271,7 @@ const SellerDashboard: React.FC = () => {
     { tab: 'profile', label: 'Profile', Icon: User },
     { tab: 'orders', label: 'Order History', Icon: Package },
     { tab: 'bulk-order', label: 'Order Request', Icon: FileText },
-    { tab: 'direct-order', label: 'Wholesale Store', Icon: ShoppingBag, path: '/bulk-order' },
+    { tab: 'direct-order', label: 'Seller Store', Icon: ShoppingBag, path: '/bulk-order' },
   ];
 
   if (isLoading) {
@@ -432,7 +432,7 @@ const SellerDashboard: React.FC = () => {
                         Quick Bulk Order
                       </Link>
                       <Link
-                        to="/wholesale"
+                        to="/seller"
                         className="bg-white/10 text-white px-6 py-3 rounded-lg text-xs font-bold tracking-widest uppercase hover:bg-white/20 transition-all"
                       >
                         View Catalog
@@ -576,11 +576,19 @@ const SellerDashboard: React.FC = () => {
                                 <td className="px-6 py-4 text-sm text-gray-600">{order.qty}</td>
                                 <td className="px-6 py-4 text-sm font-medium text-[#111111]">₹{order.total.toFixed(2)}</td>
                                 <td className="px-6 py-4">
-                                  <span
-                                    className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-medium uppercase tracking-wider ${getStatusClass(order.status)}`}
-                                  >
-                                    {order.status}
-                                  </span>
+                                  <div className="flex items-center gap-4">
+                                    <span
+                                      className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-medium uppercase tracking-wider ${getStatusClass(order.status)}`}
+                                    >
+                                      {order.status}
+                                    </span>
+                                    <Link 
+                                      to={profile?.role === 'admin' ? `/admin/order/${order.id}/invoice` : `/seller-dashboard/order/${order.id}/invoice`}
+                                      className="text-[10px] font-bold uppercase tracking-widest text-[#6B8E23] hover:underline"
+                                    >
+                                      Invoice
+                                    </Link>
+                                  </div>
                                 </td>
                               </tr>
                             ))}
@@ -594,11 +602,19 @@ const SellerDashboard: React.FC = () => {
                           <div key={order.id} className="bg-[#FAFAF9] p-4 rounded-lg space-y-2">
                             <div className="flex justify-between items-center">
                               <span className="text-sm font-mono text-[#6B8E23]">#{order.id.slice(-8).toUpperCase()}</span>
-                              <span
-                                className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-medium uppercase tracking-wider ${getStatusClass(order.status)}`}
-                              >
-                                {order.status}
-                              </span>
+                              <div className="flex items-center gap-3">
+                                <span
+                                  className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-medium uppercase tracking-wider ${getStatusClass(order.status)}`}
+                                >
+                                  {order.status}
+                                </span>
+                                <Link 
+                                  to={profile?.role === 'admin' ? `/admin/order/${order.id}/invoice` : `/seller-dashboard/order/${order.id}/invoice`}
+                                  className="text-[10px] font-bold uppercase tracking-widest text-[#6B8E23]"
+                                >
+                                  Invoice
+                                </Link>
+                              </div>
                             </div>
                             {profile?.role === 'admin' && (
                               <p className="text-xs text-gray-500">Seller: {order.sellerName || 'N/A'}</p>

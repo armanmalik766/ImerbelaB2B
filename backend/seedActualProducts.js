@@ -15,7 +15,7 @@ const products = [
     imageUrl: '/shampoo-150ml.png',
     category: 'shampoo',
     tags: ['300ml', '3nos', 'bundle'],
-    description: 'A professional-grade scalp balancing cleanser in a wholesale pack of 3. Formulated with high-purity Neem Seed Kernel extract.',
+    description: 'A professional-grade scalp balancing cleanser in a seller pack of 3. Formulated with high-purity Neem Seed Kernel extract.',
     howToUse: [
       'Direction to use IMERBELA Neem Seed Kernel Shampoo',
       '1.\tWet hair and scalp thoroughly with water.',
@@ -42,7 +42,7 @@ const products = [
     imageUrl: '/shampoo-150ml.png',
     category: 'shampoo',
     tags: ['300ml', '6nos', 'bundle'],
-    description: 'A professional-grade scalp balancing cleanser in a wholesale pack of 6. Ideal for medium-sized retail shelf space.',
+    description: 'A professional-grade scalp balancing cleanser in a seller pack of 6. Ideal for medium-sized retail shelf space.',
     howToUse: [
       'Direction to use IMERBELA Neem Seed Kernel Shampoo',
       '1.\tWet hair and scalp thoroughly with water.',
@@ -69,7 +69,7 @@ const products = [
     imageUrl: '/shampoo-150ml.png',
     category: 'shampoo',
     tags: ['300ml', '12nos', 'bundle'],
-    description: 'A professional-grade scalp balancing cleanser in a bulk wholesale pack of 12. Maximum profit margin for premium partners.',
+    description: 'A professional-grade scalp balancing cleanser in a bulk seller pack of 12. Maximum profit margin for premium partners.',
     howToUse: [
       'Direction to use IMERBELA Neem Seed Kernel Shampoo',
       '1.\tWet hair and scalp thoroughly with water.',
@@ -98,7 +98,7 @@ const products = [
     imageUrl: '/shampoo-150ml.png',
     category: 'shampoo',
     tags: ['150ml', '3nos', 'bundle'],
-    description: 'Travel-friendly size in a wholesale pack of 3.',
+    description: 'Travel-friendly size in a seller pack of 3.',
     howToUse: [
       'Direction to use IMERBELA Neem Seed Kernel Shampoo',
       '1.\tWet hair and scalp thoroughly with water.',
@@ -125,7 +125,7 @@ const products = [
     imageUrl: '/shampoo-150ml.png',
     category: 'shampoo',
     tags: ['150ml', '6nos', 'bundle'],
-    description: 'Travel-friendly size in a wholesale pack of 6.',
+    description: 'Travel-friendly size in a seller pack of 6.',
     howToUse: [
       'Direction to use IMERBELA Neem Seed Kernel Shampoo',
       '1.\tWet hair and scalp thoroughly with water.',
@@ -152,7 +152,7 @@ const products = [
     imageUrl: '/shampoo-150ml.png',
     category: 'shampoo',
     tags: ['150ml', '12nos', 'bundle'],
-    description: 'Travel-friendly size in a wholesale pack of 12.',
+    description: 'Travel-friendly size in a seller pack of 12.',
     howToUse: [
       'Direction to use IMERBELA Neem Seed Kernel Shampoo',
       '1.\tWet hair and scalp thoroughly with water.',
@@ -181,7 +181,7 @@ const products = [
     imageUrl: '/conditioner-150ml.png',
     category: 'conditioner',
     tags: ['300ml', '3nos', 'bundle'],
-    description: 'Intensive hydration therapy in a wholesale pack of 3.',
+    description: 'Intensive hydration therapy in a seller pack of 3.',
     howToUse: [
       'How to Use',
       '1.\tAfter shampooing, apply an adequate amount of IMERBELA Neem Seed Kernel Conditioner to wet hair.',
@@ -206,7 +206,7 @@ const products = [
     imageUrl: '/conditioner-150ml.png',
     category: 'conditioner',
     tags: ['300ml', '6nos', 'bundle'],
-    description: 'Intensive hydration therapy in a wholesale pack of 6.',
+    description: 'Intensive hydration therapy in a seller pack of 6.',
     howToUse: [
       'How to Use',
       '1.\tAfter shampooing, apply an adequate amount of IMERBELA Neem Seed Kernel Conditioner to wet hair.',
@@ -231,7 +231,7 @@ const products = [
     imageUrl: '/conditioner-150ml.png',
     category: 'conditioner',
     tags: ['300ml', '12nos', 'bundle'],
-    description: 'Intensive hydration therapy in a wholesale pack of 12.',
+    description: 'Intensive hydration therapy in a seller pack of 12.',
     howToUse: [
       'How to Use',
       '1.\tAfter shampooing, apply an adequate amount of IMERBELA Neem Seed Kernel Conditioner to wet hair.',
@@ -335,7 +335,7 @@ const products = [
     imageUrl: '/serum.jpeg',
     category: 'serum',
     tags: ['30ml', '3nos', 'bundle'],
-    description: 'Clinical strength hair follicle support in a wholesale pack of 3.',
+    description: 'Clinical strength hair follicle support in a seller pack of 3.',
     howToUse: [
       'Directions for Use /How to Use',
       'IMERBELA Neem Seed Kernel Hair Growth Serum',
@@ -368,7 +368,7 @@ const products = [
     imageUrl: '/serum.jpeg',
     category: 'serum',
     tags: ['30ml', '6nos', 'bundle'],
-    description: 'Clinical strength hair follicle support in a wholesale pack of 6.',
+    description: 'Clinical strength hair follicle support in a seller pack of 6.',
     howToUse: [
       'Directions for Use /How to Use',
       'IMERBELA Neem Seed Kernel Hair Growth Serum',
@@ -401,7 +401,7 @@ const products = [
     imageUrl: '/serum.jpeg',
     category: 'serum',
     tags: ['30ml', '12nos', 'bundle'],
-    description: 'Clinical strength hair follicle support in a wholesale pack of 12.',
+    description: 'Clinical strength hair follicle support in a seller pack of 12.',
     howToUse: [
       'Directions for Use /How to Use',
       'IMERBELA Neem Seed Kernel Hair Growth Serum',

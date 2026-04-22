@@ -78,7 +78,7 @@ const Checkout: React.FC = () => {
         amount: amount,
         currency: currency,
         name: 'IMERBELA',
-        description: 'B2B Wholesale Order',
+        description: 'B2B Seller Order',
         order_id: razorpayOrderId,
         handler: async (rzpResponse: any) => {
           try {
@@ -353,7 +353,7 @@ const Checkout: React.FC = () => {
                   <span className="line-through">₹{(totalMrp || 0).toFixed(0)}</span>
                 </div>
                 <div className="flex justify-between items-center text-[11px] uppercase tracking-widest text-[#6B8E23] font-bold">
-                  <span>Wholesale Discount</span>
+                  <span>Seller Discount</span>
                   <span>- ₹{Math.max(0, (totalMrp || 0) - totalAmount).toFixed(0)}</span>
                 </div>
                 <div className="flex justify-between text-gray-600 text-xs font-light">
@@ -377,7 +377,7 @@ const Checkout: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-3 text-gray-500">
                   <Package className="w-4 h-4 text-[#6B8E23]" />
-                  <span className="text-[10px] font-bold uppercase tracking-widest">Insured Wholesale Dispatch</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest">Insured Seller Dispatch</span>
                 </div>
               </div>
             </div>

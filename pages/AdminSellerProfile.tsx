@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { getAllOrdersAdmin, getAllSellers, getSellerByIdAdmin, logout, AdminOrder, SellerProfile } from '../services/api';
-import { ArrowLeft, Building2, Mail, Phone, Calendar, MapPin, Package, ShoppingBag, TrendingUp, Clock, Loader2 } from 'lucide-react';
+import { getAllOrdersAdmin, getAllSellers, getSellerByIdAdmin, logout, getAllProductsAdmin, AdminOrder, SellerProfile, Product } from '../services/api';
+import { ArrowLeft, Building2, Mail, Phone, Calendar, MapPin, Package, ShoppingBag, TrendingUp, Clock, Loader2, MoreHorizontal, ChevronDown, Truck, Pencil, Grid } from 'lucide-react';
 
 const AdminSellerProfile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -9,8 +9,10 @@ const AdminSellerProfile: React.FC = () => {
 
   const [seller, setSeller] = useState<SellerProfile | null>(null);
   const [orders, setOrders] = useState<AdminOrder[]>([]);
+  const [selectedOrder, setSelectedOrder] = useState<AdminOrder | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     if (!id) return;
@@ -22,6 +24,11 @@ const AdminSellerProfile: React.FC = () => {
         const ordersRes = await getAllOrdersAdmin('all');
         if (ordersRes.success && ordersRes.data) {
           setOrders(ordersRes.data.filter((o) => o.seller?._id === id));
+        }
+
+        const productsRes = await getAllProductsAdmin();
+        if (productsRes.success && productsRes.data) {
+          setAllProducts(productsRes.data);
         }
 
         // First try the dedicated single-seller endpoint.
@@ -79,6 +86,257 @@ const AdminSellerProfile: React.FC = () => {
         <div className="max-w-5xl mx-auto bg-white rounded-2xl border border-gray-100 p-8 text-center">
           <p className="text-gray-500 mb-4">Seller profile not found.</p>
           <Link to="/admin" className="text-[#6B8E23] hover:underline">Back to Admin</Link>
+        </div>
+      </section>
+    );
+  }
+  if (selectedOrder) {
+    const isPaid = selectedOrder.paymentStatus === 'captured' || selectedOrder.paymentStatus === 'paid';
+    const isUnfulfilled = selectedOrder.status === 'pending' || selectedOrder.status === 'confirmed' || selectedOrder.status === 'processing';
+    const isFulfilled = selectedOrder.status === 'shipped' || selectedOrder.status === 'delivered';
+    const subtotal = selectedOrder.items.reduce((sum, item) => sum + (item.totalPrice || (item.unitPrice * item.quantity)), 0);
+    const shipping = 0; // Hardcoded or from DB if available
+
+    return (
+      <section className="min-h-screen bg-[#F3F4F6]">
+        <div className="max-w-5xl mx-auto px-5 md:px-8 py-8 md:py-10">
+          {/* Header */}
+          <div className="flex items-center gap-3 mb-8">
+            <button 
+              onClick={() => setSelectedOrder(null)}
+              className="p-2 hover:bg-white rounded-lg transition-colors text-gray-500 hover:text-[#6B8E23]"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+            <div>
+              <div className="flex items-center gap-3">
+                <h1 className="text-2xl font-bold text-[#111111]">#{selectedOrder._id.slice(-6).toUpperCase()}</h1>
+                <div className="flex gap-2">
+                  <span className={`px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${isPaid ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'}`}>
+                    {isPaid ? 'Paid' : 'Pending'}
+                  </span>
+                  <span className={`px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${isFulfilled ? 'bg-blue-100 text-blue-700' : 'bg-yellow-100 text-yellow-700'}`}>
+                    {isFulfilled ? 'Fulfilled' : 'Unfulfilled'}
+                  </span>
+                </div>
+              </div>
+              <p className="text-sm text-gray-500 mt-1">
+                {new Date(selectedOrder.createdAt).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })} from Online Store
+              </p>
+            </div>
+          </div>
+ 
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2 space-y-6">
+              {/* Fulfillment Card */}
+              <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+              <div className="p-4 border-b border-gray-100 flex items-center gap-2">
+                <div className={`px-3 py-1.5 rounded-lg flex items-center gap-2 text-sm font-medium ${isUnfulfilled ? 'bg-[#FBECA9] text-[#7A5B00]' : 'bg-green-100 text-green-800'}`}>
+                  <Package className="w-4 h-4" />
+                  {isUnfulfilled ? 'Unfulfilled' : 'Fulfilled'}
+                </div>
+              </div>
+              <div className="p-4 border-b border-gray-100 text-sm text-gray-700 flex items-center gap-3 font-medium">
+                <div className="w-6 h-6 bg-[#6B8E23]/10 rounded flex items-center justify-center">
+                  <Truck className="w-3.5 h-3.5 text-[#6B8E23]" />
+                </div>
+                IMERBELA
+              </div>
+              <div className="p-4">
+                <div className="space-y-4">
+                  {selectedOrder.items.map((item, idx) => (
+                    <div key={idx} className="flex items-center justify-between flex-wrap gap-4 group">
+                      <Link to={`/product/${item.handle}`} className="flex items-center gap-4 group/item">
+                        <div className="w-14 h-14 bg-gray-50 rounded-xl border border-gray-100 flex items-center justify-center overflow-hidden transition-all group-hover:border-[#6B8E23]/30">
+                          {allProducts.find(p => p.handle === item.handle)?.imageUrl ? (
+                            <img 
+                              src={allProducts.find(p => p.handle === item.handle)?.imageUrl} 
+                              alt={item.title}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <Package className="w-6 h-6 text-gray-300" />
+                          )}
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-[#111111] group-hover/item:text-[#6B8E23] transition-colors">{item.title}</p>
+                          <p className="text-xs text-gray-500 mt-1 flex items-center gap-2">
+                            <span className="bg-gray-100 px-2 py-0.5 rounded text-gray-600 font-medium tracking-wide text-[10px] uppercase">Default</span>
+                            <span className="text-gray-300">|</span>
+                            <span className="font-mono text-[10px] text-gray-400">{item.handle}</span>
+                          </p>
+                        </div>
+                      </Link>
+                       <div className="text-right">
+                        <div className="flex items-center justify-end gap-6 text-sm">
+                          <div className="text-gray-400">
+                            <p className="text-[10px] uppercase tracking-wider mb-0.5">Retail Price</p>
+                            <p className="line-through">₹{(allProducts.find(p => p.handle === item.handle)?.mrpPerUnit || 0).toFixed(2)}</p>
+                          </div>
+                          <div className="text-[#111111] font-medium">
+                            <p className="text-[10px] uppercase tracking-wider text-[#6B8E23] mb-0.5">Seller Price</p>
+                            <p>₹{item.unitPrice.toFixed(2)} × {item.quantity}</p>
+                          </div>
+                          <div className="w-20 text-right font-bold text-[#111111]">
+                            <p className="text-[10px] uppercase tracking-wider text-gray-400 mb-0.5">Total</p>
+                            <p>₹{item.totalPrice.toFixed(2)}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="p-4 border-t border-gray-100 bg-[#FAFAFA] flex justify-end">
+                <div className="inline-flex rounded-lg shadow-sm">
+                  <button className="px-4 py-2 bg-[#2E2E2E] hover:bg-[#111111] text-white text-sm font-medium rounded-l-lg transition-colors border border-[#2E2E2E]">
+                    Mark as fulfilled
+                  </button>
+                  <button className="px-3 py-2 bg-[#2E2E2E] hover:bg-[#111111] text-white rounded-r-lg border-l border-[#4a4a4a] transition-colors">
+                    <ChevronDown className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Payment Card */}
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+              <div className="p-4 border-b border-gray-100 flex items-center justify-between">
+                <div className={`px-3 py-1.5 rounded-lg flex items-center gap-2 text-sm font-medium ${isPaid ? 'bg-green-100 text-green-800' : 'bg-[#FFE9C9] text-[#9A5B13]'}`}>
+                  {!isPaid && <Clock className="w-4 h-4" />}
+                  {isPaid ? 'Paid' : 'Payment pending'}
+                </div>
+                <button className="text-gray-400 hover:text-gray-600">
+                  <MoreHorizontal className="w-5 h-5" />
+                </button>
+              </div>
+              <div className="p-4 text-sm">
+                <div className="flex justify-between py-2">
+                  <span className="text-gray-600">Subtotal</span>
+                  <div className="flex items-center gap-4 md:gap-10">
+                    <span className="text-gray-600">{selectedOrder.totalUnits} item{selectedOrder.totalUnits > 1 ? 's' : ''}</span>
+                    <span className="text-[#111111] w-20 text-right">₹{subtotal.toFixed(2)}</span>
+                  </div>
+                </div>
+                <div className="flex justify-between py-2">
+                  <span className="text-gray-600">Shipping</span>
+                  <div className="flex items-center gap-4 md:gap-10">
+                    <span className="text-gray-500">IMERBELA (Standard Shipping)</span>
+                    <span className="text-[#111111] w-20 text-right">₹{shipping.toFixed(2)}</span>
+                  </div>
+                </div>
+                <div className="flex justify-between py-3 font-semibold text-[#111111] text-base mt-2 mb-2">
+                  <span>Total</span>
+                  <span className="w-20 text-right">₹{(subtotal + shipping).toFixed(2)}</span>
+                </div>
+              </div>
+              <div className="p-4 border-t border-gray-100 text-sm">
+                <div className="flex justify-between py-2 text-gray-600">
+                  <span>Paid</span>
+                  <span className="text-[#111111] w-20 text-right">₹{isPaid ? (subtotal + shipping).toFixed(2) : '0.00'}</span>
+                </div>
+                <div className="flex justify-between py-2 font-medium text-[#111111]">
+                  <span>Balance</span>
+                  <span className="w-20 text-right">₹{isPaid ? '0.00' : (subtotal + shipping).toFixed(2)}</span>
+                </div>
+              </div>
+              <div className="p-4 border-t border-gray-100 bg-[#FAFAFA] flex justify-end gap-3 flex-wrap">
+                <button className="px-4 py-2 bg-white border border-gray-300 hover:bg-gray-50 text-[#111111] text-sm font-medium rounded-lg transition-colors shadow-sm">
+                  Send invoice
+                </button>
+                <button className="px-4 py-2 bg-[#2E2E2E] hover:bg-[#111111] text-white text-sm font-medium rounded-lg transition-colors shadow-sm">
+                  Mark as paid
+                </button>
+              </div>
+            </div>
+
+            {/* Blocks Card */}
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden mt-6">
+              <div className="p-4 border-b border-gray-100 flex items-center gap-2 font-semibold text-[#111111]">
+                <Grid className="w-4 h-4 text-gray-500" /> Blocks
+              </div>
+              <div className="p-10 text-center text-sm text-gray-500 bg-[#FAFAFA]">
+                No blocks added
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column */}
+          <div className="space-y-6">
+            {/* Notes Card */}
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-semibold text-[#111111] text-sm">Notes</h3>
+                <button className="text-gray-400 hover:text-gray-600">
+                  <Pencil className="w-4 h-4" />
+                </button>
+              </div>
+              <p className="text-sm text-gray-600">No notes from customer</p>
+            </div>
+
+            {/* Customer Card */}
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-semibold text-[#111111] text-sm">Customer</h3>
+                <button className="text-gray-400 hover:text-gray-600">
+                  <MoreHorizontal className="w-5 h-5" />
+                </button>
+              </div>
+              <div className="mb-6">
+                <p className="text-sm text-[#005BD3] hover:underline cursor-pointer font-medium mb-1">{selectedOrder.shippingAddress?.name || seller.name}</p>
+                <p className="text-sm text-[#005BD3] hover:underline cursor-pointer">{orders.length} order{orders.length !== 1 ? 's' : ''}</p>
+              </div>
+
+              <div className="mb-6">
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-semibold text-[#111111] text-sm">Contact information</h3>
+                  <button className="text-gray-400 hover:text-gray-600">
+                    <Pencil className="w-4 h-4" />
+                  </button>
+                </div>
+                <p className="text-sm text-[#005BD3] hover:underline cursor-pointer mb-1">{selectedOrder.shippingAddress?.email || seller.email}</p>
+                <p className="text-sm text-gray-600">{selectedOrder.shippingAddress?.phone || seller.phone || 'No phone number'}</p>
+              </div>
+
+              <div className="mb-6">
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-semibold text-[#111111] text-sm">Shipping address</h3>
+                  <button className="text-gray-400 hover:text-gray-600">
+                    <Pencil className="w-4 h-4" />
+                  </button>
+                </div>
+                <div className="text-sm text-gray-600 leading-relaxed">
+                  <p>{selectedOrder.shippingAddress?.name || seller.name}</p>
+                  {selectedOrder.shippingAddress?.businessName && <p>{selectedOrder.shippingAddress.businessName}</p>}
+                  <p>{selectedOrder.shippingAddress?.address || seller.addressLine1}</p>
+                  <p>{selectedOrder.shippingAddress?.city || seller.city} {selectedOrder.shippingAddress?.pincode || seller.pincode}</p>
+                  <p>{selectedOrder.shippingAddress?.state || seller.state}, India</p>
+                  <p className="mt-1">{selectedOrder.shippingAddress?.phone || seller.phone}</p>
+                </div>
+                <p className="text-sm text-[#005BD3] hover:underline cursor-pointer mt-2 font-medium">View map</p>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-semibold text-[#111111] text-sm">Billing address</h3>
+                  <button className="text-gray-400 hover:text-gray-600">
+                    <Pencil className="w-4 h-4" />
+                  </button>
+                </div>
+                <p className="text-sm text-gray-600">Same as shipping address</p>
+              </div>
+            </div>
+
+            {/* Conversion Summary Card */}
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4">
+              <h3 className="font-semibold text-[#111111] text-sm mb-4">Conversion summary</h3>
+              <div className="text-sm text-gray-600 flex items-start gap-3">
+                <ShoppingBag className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
+                <p>This is their 1st order</p>
+              </div>
+            </div>
+            </div>
+          </div>
         </div>
       </section>
     );
@@ -162,15 +420,26 @@ const AdminSellerProfile: React.FC = () => {
           ) : (
             <div className="space-y-3">
               {orders.map((order) => (
-                <div key={order._id} className="border border-gray-100 rounded-xl p-4 hover:border-gray-200 hover:bg-[#FCFCFC] transition-all">
+                <div 
+                  key={order._id} 
+                  className="border border-gray-100 rounded-xl p-4 hover:border-gray-200 hover:bg-[#FCFCFC] transition-all cursor-pointer"
+                  onClick={() => setSelectedOrder(order)}
+                >
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-2">
                     <span className="text-xs uppercase tracking-widest text-gray-400 font-bold">#{order._id.slice(-8).toUpperCase()}</span>
                     <span className="text-xs text-gray-500">{new Date(order.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                   </div>
-                  <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-600">
+                  <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-600 items-center">
                     <span>{order.totalUnits} units</span>
                     <span>₹{order.totalAmount.toFixed(2)}</span>
-                    <span className="capitalize">{order.status}</span>
+                    <span className="capitalize px-2 py-0.5 bg-gray-50 rounded text-[10px] font-medium border border-gray-100">{order.status}</span>
+                    <Link 
+                      to={`/admin/order/${order._id}/invoice`}
+                      onClick={(e) => e.stopPropagation()}
+                      className="ml-auto text-[10px] font-bold uppercase tracking-widest text-[#6B8E23] hover:underline"
+                    >
+                      View Invoice
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -182,24 +451,28 @@ const AdminSellerProfile: React.FC = () => {
   );
 };
 
-const InfoCard: React.FC<{ icon: React.ReactNode; label: string; value: string }> = ({ icon, label, value }) => (
-  <div className="bg-[#F8F8F6] border border-gray-100 rounded-xl p-4 hover:border-[#6B8E23]/20 transition-all">
-    <div className="flex items-center gap-2 mb-1">
-      {icon}
-      <p className="text-[10px] uppercase tracking-widest font-bold text-gray-400">{label}</p>
+function InfoCard({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
+  return (
+    <div className="bg-[#F8F8F6] border border-gray-100 rounded-xl p-4 hover:border-[#6B8E23]/20 transition-all">
+      <div className="flex items-center gap-2 mb-1">
+        {icon}
+        <p className="text-[10px] uppercase tracking-widest font-bold text-gray-400">{label}</p>
+      </div>
+      <p className="text-sm text-[#111111] leading-relaxed">{value}</p>
     </div>
-    <p className="text-sm text-[#111111] leading-relaxed">{value}</p>
-  </div>
-);
+  );
+}
 
-const StatCard: React.FC<{ icon: React.ReactNode; label: string; value: string }> = ({ icon, label, value }) => (
-  <div className="bg-gradient-to-b from-[#F8F8F6] to-white border border-gray-100 rounded-xl p-4">
-    <div className="flex items-center gap-2 mb-2 text-[#6B8E23]">
-      {icon}
-      <p className="text-[10px] uppercase tracking-widest font-bold text-gray-400">{label}</p>
+function StatCard({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
+  return (
+    <div className="bg-gradient-to-b from-[#F8F8F6] to-white border border-gray-100 rounded-xl p-4">
+      <div className="flex items-center gap-2 mb-2 text-[#6B8E23]">
+        {icon}
+        <p className="text-[10px] uppercase tracking-widest font-bold text-gray-400">{label}</p>
+      </div>
+      <p className="text-2xl font-light text-[#111111] tracking-tight">{value}</p>
     </div>
-    <p className="text-2xl font-light text-[#111111] tracking-tight">{value}</p>
-  </div>
-);
+  );
+}
 
 export default AdminSellerProfile;

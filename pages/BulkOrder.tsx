@@ -50,7 +50,7 @@ const BulkOrder: React.FC = () => {
           <div className="w-20 h-20 bg-gray-100 rounded-full mx-auto mb-8 flex items-center justify-center">
             <Lock className="w-9 h-9 text-gray-300" />
           </div>
-          <h2 className="text-3xl font-light mb-4 text-[#111111]">Wholesale <span className="font-serif italic text-gray-400">Access Only</span></h2>
+          <h2 className="text-3xl font-light mb-4 text-[#111111]">Seller <span className="font-serif italic text-gray-400">Access Only</span></h2>
           <p className="text-gray-500 font-light mb-8">Access exclusively for approved B2B partners.</p>
           <div className="flex gap-4 justify-center">
             <Link to="/seller-login" className="bg-[#111111] text-white px-8 py-4 text-xs font-bold uppercase tracking-widest rounded-sm">Sign In</Link>
@@ -80,11 +80,11 @@ const BulkOrder: React.FC = () => {
     <div className="animate-in fade-in duration-500">
       <section className="bg-[#111111] text-white py-16">
         <div className="max-w-7xl mx-auto px-4">
-          <Link to="/wholesale" className="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest text-gray-400 hover:text-white transition-colors mb-6">
-            <ArrowLeft className="w-3.5 h-3.5" /> Back to Wholesale Hub
+          <Link to="/seller" className="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest text-gray-400 hover:text-white transition-colors mb-6">
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to Seller Hub
           </Link>
           <h1 className="text-4xl md:text-5xl font-light tracking-tight mb-4">Full <span className="font-serif italic text-gray-400">catalogue</span></h1>
-          <p className="text-gray-400 font-light max-w-xl">Browse all B2B wholesale variants and bundle sizes.</p>
+          <p className="text-gray-400 font-light max-w-xl">Browse all B2B seller variants and bundle sizes.</p>
         </div>
       </section>
 

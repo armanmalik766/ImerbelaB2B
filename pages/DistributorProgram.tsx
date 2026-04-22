@@ -68,7 +68,7 @@ const TIERS = [
     minUnits: '2000 units',
     discount: '30%',
     benefits: [
-      'Best-in-class wholesale pricing',
+      'Best-in-class seller pricing',
       '24/7 dedicated support line',
       'Real-time analytics dashboard',
       'Custom branding & white-label options',
@@ -287,10 +287,10 @@ const DistributorProgram: React.FC = () => {
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              to="/wholesale"
+              to="/seller"
               className="border border-white/20 text-white px-12 py-5 text-xs font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-[#111111] transition-all rounded-sm text-center"
             >
-              View Wholesale Hub
+              View Seller Hub
             </Link>
           </div>
         </div>

@@ -27,7 +27,7 @@ const getBulkPrice = (product, quantity) => {
 };
 
 // ───────────────────────────────────────────────────────
-// POST /api/orders — Place a wholesale order
+// POST /api/orders — Place a seller order
 // Requires: approved seller
 // Validates: each item quantity >= product MOQ
 // ───────────────────────────────────────────────────────

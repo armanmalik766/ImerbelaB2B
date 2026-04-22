@@ -40,4 +40,4 @@ export interface SectionSettings {
   showPairingLabel: boolean;
 }
 
-export type Page = 'home' | 'product' | 'ingredients' | 'about' | 'contact' | 'become-seller' | 'seller-login' | 'seller-dashboard' | 'admin' | 'wholesale' | 'bulk-order' | 'distributor-program';
+export type Page = 'home' | 'product' | 'ingredients' | 'about' | 'contact' | 'become-seller' | 'seller-login' | 'seller-dashboard' | 'admin' | 'seller' | 'bulk-order' | 'distributor-program';

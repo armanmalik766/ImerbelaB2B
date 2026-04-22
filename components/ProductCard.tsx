@@ -65,7 +65,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, isPaired }) => {
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-0.5">Wholesale Price</p>
+                  <p className="text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-0.5">Seller Price</p>
                   <p className="text-base font-bold text-[#111111]">₹{product.price.toFixed(0)}</p>
                 </div>
                 <div className="text-right">

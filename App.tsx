@@ -11,7 +11,8 @@ import SellerLogin from './pages/SellerLogin';
 import SellerDashboard from './pages/SellerDashboard';
 import AdminPanel from './pages/AdminPanel';
 import AdminSellerProfile from './pages/AdminSellerProfile';
-import Wholesale from './pages/Wholesale';
+import OrderInvoice from './pages/OrderInvoice';
+import Seller from './pages/Seller';
 import BulkOrder from './pages/BulkOrder';
 import DistributorProgram from './pages/DistributorProgram';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -89,16 +90,12 @@ const ScrollToTop: React.FC = () => {
 // Check if current route should hide the main navbar/footer (dashboard has its own)
 const useIsDashboardRoute = () => {
   const { pathname } = useLocation();
-  return pathname === '/seller-dashboard' || pathname.startsWith('/admin');
+  return pathname.startsWith('/seller-dashboard') || pathname.startsWith('/admin');
 };
 
 const App: React.FC = () => {
   const navigate = useNavigate();
   const isDashboardRoute = useIsDashboardRoute();
-
-  const navigateToProduct = (product: Product) => {
-    navigate(`/product/${product.handle}`);
-  };
 
   return (
     <div className="min-h-screen bg-white flex flex-col font-sans antialiased text-[#111111]">
@@ -109,7 +106,7 @@ const App: React.FC = () => {
       <main className="flex-grow">
         <Routes>
           {/* Existing Pages */}
-          <Route path="/" element={<Wholesale onProductClick={navigateToProduct} />} />
+          <Route path="/" element={<Seller />} />
           <Route path="/product/:handle" element={<ProductDetailWrapper />} />
 
           <Route
@@ -194,8 +191,8 @@ const App: React.FC = () => {
             }
           />
 
-          {/* B2B Wholesale Pages */}
-          <Route path="/wholesale" element={<Wholesale onProductClick={navigateToProduct} />} />
+          {/* B2B Seller Pages */}
+          <Route path="/seller" element={<Seller />} />
           <Route path="/bulk-order" element={<BulkOrder />} />
           <Route path="/distributor-program" element={<DistributorProgram />} />
 
@@ -223,6 +220,22 @@ const App: React.FC = () => {
             element={
               <ProtectedRoute requiredRole="admin">
                 <AdminSellerProfile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/order/:id/invoice"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <OrderInvoice />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/seller-dashboard/order/:id/invoice"
+            element={
+              <ProtectedRoute>
+                <OrderInvoice />
               </ProtectedRoute>
             }
           />

@@ -104,7 +104,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onProductClick }
             <nav className="text-[10px] uppercase tracking-widest text-gray-400 flex items-center space-x-2">
               <Link to="/" className="hover:text-[#111111] transition-colors">Home</Link>
               <span>/</span>
-              <span>Wholesale</span>
+              <span>Seller</span>
             </nav>
             <h1 className="text-3xl md:text-4xl font-light tracking-tight text-[#111111]">{product.title}</h1>
             <p className="text-[#6B8E23] text-xs font-bold uppercase tracking-widest">{product.subtitle}</p>
@@ -226,7 +226,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onProductClick }
                     Account Under Review
                   </h3>
                   <p className="text-xs text-gray-500 font-light max-w-sm mx-auto">
-                    Your seller application is being reviewed. You'll be able to view wholesale pricing and place orders once approved.
+                    Your seller application is being reviewed. You'll be able to view seller pricing and place orders once approved.
                   </p>
                 </div>
               ) : (
@@ -314,7 +314,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onProductClick }
               {isInCart(product._id) && (
                 <div className="flex items-center gap-2 text-xs text-[#6B8E23] bg-[#6B8E23]/5 p-4 rounded-xl border border-[#6B8E23]/10">
                   <CheckCircle className="w-4 h-4" />
-                  <span className="font-medium">{getItemQuantity(product._id)} wholesale packs in your cart</span>
+                  <span className="font-medium">{getItemQuantity(product._id)} seller packs in your cart</span>
                 </div>
               )}
             </div>
@@ -324,7 +324,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onProductClick }
               {!isAuthenticated ? (
                 <div className="bg-[#F5F5F7] rounded-lg p-5 text-center space-y-3">
                   <p className="text-xs text-gray-500 uppercase tracking-wider font-medium">
-                    Only for wholesale buyers
+                    Only for seller buyers
                   </p>
                   <Link
                     to="/seller-login"

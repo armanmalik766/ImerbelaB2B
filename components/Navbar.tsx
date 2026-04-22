@@ -13,8 +13,8 @@ const Navbar: React.FC = () => {
 
   const navLinks = [
     { href: 'https://imerbela.com', label: 'Retail Store', external: true },
-    { to: '/wholesale', label: 'Seller' },
-    { to: '/bulk-order', label: 'B2B Marketplace' },
+    { to: '/seller', label: 'Seller' },
+    { to: '/bulk-order', label: 'Seller Marketplace' },
     ...(isAuthenticated ? [{ to: isAdmin ? '/admin' : '/seller-dashboard', label: 'Dashboard' }] : []),
     { to: '/contact', label: 'Contact' },
   ];
@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
       <div className="bg-white text-black text-center py-2 border-b border-gray-100">
         <p className="text-[10px] uppercase tracking-[0.2em] font-bold flex items-center justify-center gap-2">
           <Package className="w-3 h-3 text-[#6B8E23]" />
-          <span>B2B Wholesale Platform — Exclusive for Business Partners</span>
+          <span>B2B Seller Platform — Exclusive for Business Partners</span>
           <span className="hidden sm:inline text-gray-200 mx-2">|</span>
           <Link to="/become-seller" className="hidden sm:inline text-[#6B8E23] hover:text-[#556B2F] transition-colors font-black">
             Apply Now →
@@ -199,12 +199,12 @@ const Navbar: React.FC = () => {
                 <Package className="w-5 h-5 text-[#6B8E23]" />
               </div>
               <div>
-                <p className="text-[10px] font-bold text-[#111111] uppercase tracking-wider">B2B Wholesale</p>
+                <p className="text-[10px] font-bold text-[#111111] uppercase tracking-wider">B2B Seller</p>
                 <p className="text-[9px] text-gray-400">Premium Ayurvedic Skincare</p>
               </div>
             </div>
             <p className="text-[9px] text-gray-400 leading-relaxed">
-              Access wholesale pricing and exclusive bulk offers for business partners.
+              Access seller pricing and exclusive bulk offers for business partners.
             </p>
           </div>
         </div>
